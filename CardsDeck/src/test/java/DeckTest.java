@@ -11,10 +11,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import main.java.Deck;
+import main.java.ShuffleCards;
 
 public class DeckTest {
 
-	static Deck deck;
+	static ShuffleCards shuffleCards;
 	int checkDistinctElements;
 	static List<String> testDataList;
 	static String filePath = System.getProperty("user.dir")+"\\src\\test\\resources\\CardsTestCases.csv";
@@ -25,7 +26,7 @@ public class DeckTest {
 		
 		String line = "";
 		testDataList = new ArrayList<>();
-		deck = new Deck();
+		shuffleCards = new ShuffleCards();
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		
 		while((line = br.readLine()) != null) {
@@ -39,7 +40,7 @@ public class DeckTest {
 	@Test
 	public void testEqualCards() throws Exception {
 		numberOfPlayers = testDataList.get(1);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(52, checkDistinctElements);
 	}
 	
@@ -49,7 +50,7 @@ public class DeckTest {
 	@Test
 	public void testUnequalCards() throws Exception {
 		numberOfPlayers = testDataList.get(2);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 		assertEquals(52-(52%Integer.parseInt(numberOfPlayers)), checkDistinctElements);
 		
 	}
@@ -58,7 +59,7 @@ public class DeckTest {
 	@Test
 	public void testInvalidNumber() throws Exception {
 		numberOfPlayers = testDataList.get(3);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(-1, checkDistinctElements);
 	}
 	
@@ -66,7 +67,7 @@ public class DeckTest {
 	@Test
 	public void testNegativeNumber() throws Exception {
 		numberOfPlayers = testDataList.get(4);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(-1, checkDistinctElements);
 	}	
 	
@@ -74,7 +75,7 @@ public class DeckTest {
 	@Test
 	public void testString() throws Exception {
 		numberOfPlayers = testDataList.get(5);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(-2, checkDistinctElements);
 	}
 	
@@ -82,7 +83,7 @@ public class DeckTest {
 	@Test
 	public void testSpecialCharacters() throws Exception {
 		numberOfPlayers = testDataList.get(6);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(-2, checkDistinctElements);
 	}
 		
@@ -90,7 +91,7 @@ public class DeckTest {
 	@Test
 	public void testDecimalNumber() throws Exception {
 		numberOfPlayers = testDataList.get(7);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(-2, checkDistinctElements);
 	}
 	
@@ -98,7 +99,7 @@ public class DeckTest {
 	@Test
 	public void test52Cards() throws Exception {
 		numberOfPlayers = testDataList.get(9);
-		checkDistinctElements = deck.printCards(numberOfPlayers);
+		checkDistinctElements = shuffleCards.shuffleCardsToPlayers(numberOfPlayers);
 			assertEquals(52, checkDistinctElements);
 	}
 	
